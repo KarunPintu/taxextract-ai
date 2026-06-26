@@ -62,8 +62,27 @@ def inject_css() -> None:
                 --line: #D8DEE9;
                 --text: #12213A;
             }
+            #MainMenu,
+            footer,
+            header[data-testid="stHeader"],
+            [data-testid="stHeader"],
+            [data-testid="stToolbar"],
+            [data-testid="stDecoration"],
+            [data-testid="stStatusWidget"],
+            [data-testid="stDeployButton"],
+            [data-testid="stAppDeployButton"],
+            [data-testid="stToolbarActions"],
+            [aria-label="Manage app"],
+            [title="Manage app"],
+            a[aria-label="Manage app"],
+            button[aria-label="Manage app"] {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                min-height: 0 !important;
+            }
             .block-container {
-                padding-top: 1.85rem;
+                padding-top: 0 !important;
                 padding-left: 1.25rem;
                 padding-right: 1.25rem;
                 padding-bottom: 1.2rem;
@@ -813,17 +832,20 @@ def inject_css() -> None:
             .app-header {
                 background: linear-gradient(135deg, #10233F 0%, #1D3557 72%, #B88A2A 100%);
                 color: white;
-                padding: 1.6rem 1.8rem;
-                border-radius: 10px;
+                padding: 1.05rem 1.8rem;
+                border-radius: 0;
                 margin-bottom: 1.1rem;
                 box-shadow: 0 14px 32px rgba(16, 35, 63, 0.18);
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 gap: 1rem;
+                position: sticky;
+                top: 0;
+                z-index: 999;
             }
             .app-title {
-                font-size: 2.1rem;
+                font-size: 1.7rem;
                 font-weight: 800;
                 margin: 0;
                 letter-spacing: 0;
@@ -831,7 +853,7 @@ def inject_css() -> None:
             .app-tagline {
                 margin-top: 0.3rem;
                 color: #F5E6BD;
-                font-size: 1.02rem;
+                font-size: 0.92rem;
             }
             .app-header-copy {
                 color: #FFFFFF;
@@ -982,6 +1004,7 @@ def inject_css() -> None:
                 display: flex;
                 flex-wrap: wrap;
                 gap: 0.55rem;
+                align-items: center;
                 margin: 0.35rem 0 0.85rem 0;
             }
             .stage-chip {
@@ -1042,6 +1065,13 @@ def inject_css() -> None:
                 background: #F4F3FF;
                 border-color: #D9D6FE;
                 color: #5925DC;
+            }
+            .stage-flow-arrow {
+                color: #8A94A6;
+                font-size: 1.05rem;
+                font-weight: 900;
+                line-height: 1;
+                margin: 0 -0.05rem;
             }
             .confidence-pill {
                 border-radius: 999px;
@@ -1478,14 +1508,6 @@ def render_sidebar() -> None:
             use_container_width=True,
         ):
             navigate_to(section)
-    st.sidebar.markdown(
-        f"""
-        <div style="margin-top:1.8rem;font-size:0.82rem;opacity:0.72;">
-            Local model v{st.session_state.get("model_version", 1)}
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
 
 
 def as_percent(value: Any) -> int:
@@ -1586,11 +1608,14 @@ def stage_indicator_html(document: Dict[str, Any] | None = None) -> str:
         elif export_status == "Blocked":
             stage_states["Export"] = "blocked"
 
-    chips = "".join(
-        f"<span class='stage-chip stage-tone-{index} {stage_states.get(stage, '')}'>{escape(stage)}</span>"
-        for index, stage in enumerate(PROCESSING_STAGES)
-    )
-    return f"<div class='stage-strip'>{chips}</div>"
+    chips = []
+    for index, stage in enumerate(PROCESSING_STAGES):
+        chips.append(
+            f"<span class='stage-chip stage-tone-{index} {stage_states.get(stage, '')}'>{escape(stage)}</span>"
+        )
+        if index < len(PROCESSING_STAGES) - 1:
+            chips.append("<span class='stage-flow-arrow' aria-hidden='true'>&rarr;</span>")
+    return f"<div class='stage-strip'>{''.join(chips)}</div>"
 
 
 def field_rows_for_document(document: Dict[str, Any]) -> List[Dict[str, Any]]:
