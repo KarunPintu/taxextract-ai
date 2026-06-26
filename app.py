@@ -72,6 +72,7 @@ def inject_css() -> None:
             [data-testid="stDeployButton"],
             [data-testid="stAppDeployButton"],
             [data-testid="stToolbarActions"],
+            [data-testid="collapsedControl"],
             [aria-label="Manage app"],
             [title="Manage app"],
             a[aria-label="Manage app"],
@@ -133,17 +134,17 @@ def inject_css() -> None:
                 max-width: 215px !important;
             }
             [data-testid="stSidebar"][aria-expanded="false"] {
-                width: 0 !important;
-                min-width: 0 !important;
-                max-width: 0 !important;
-                overflow: hidden !important;
+                width: 215px !important;
+                min-width: 215px !important;
+                max-width: 215px !important;
+                overflow: visible !important;
             }
             [data-testid="stSidebar"][aria-expanded="false"] > div {
-                width: 0 !important;
-                min-width: 0 !important;
-                max-width: 0 !important;
+                width: 215px !important;
+                min-width: 215px !important;
+                max-width: 215px !important;
                 padding: 0 !important;
-                overflow: hidden !important;
+                overflow: visible !important;
             }
             .ryan-logo-card {
                 background: #10233F;
