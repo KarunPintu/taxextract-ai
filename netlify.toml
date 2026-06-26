@@ -1,0 +1,6 @@
+[build]
+  command = "echo TaxExtract AI is a Streamlit server app. Publishing Netlify static deployment notice."
+  publish = "netlify-static"
+
+[build.environment]
+  PYTHON_VERSION = "3.11"

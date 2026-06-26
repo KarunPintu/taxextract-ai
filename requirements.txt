@@ -1,0 +1,10 @@
+streamlit
+pandas
+openpyxl
+python-docx
+pymupdf
+pillow
+pytesseract
+python-dateutil
+scikit-learn
+joblib

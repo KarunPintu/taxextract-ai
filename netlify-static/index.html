@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaxExtract AI Deployment Notice</title>
+  <style>
+    :root {
+      --navy: #10233f;
+      --navy-2: #1d3557;
+      --gold: #b88a2a;
+      --bg: #f5f7fa;
+      --text: #12213a;
+      --muted: #667085;
+      --border: #d8dee9;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+    .shell {
+      width: min(960px, 100%);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 18px 45px rgba(16, 35, 63, 0.12);
+      overflow: hidden;
+    }
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 70%, var(--gold) 100%);
+      color: #fff;
+      padding: 34px 38px;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: 34px;
+      letter-spacing: 0;
+    }
+    .hero p {
+      margin: 10px 0 0;
+      color: #fff3c9;
+      font-size: 17px;
+      font-weight: 600;
+    }
+    .content {
+      padding: 34px 38px;
+      display: grid;
+      gap: 20px;
+    }
+    .notice {
+      border-left: 4px solid var(--gold);
+      background: #fff9e8;
+      padding: 16px 18px;
+      border-radius: 6px;
+      line-height: 1.55;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      background: #fbfcfe;
+    }
+    .card strong {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    code {
+      display: block;
+      margin-top: 10px;
+      padding: 12px;
+      background: #10233f;
+      color: #fff;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 13px;
+    }
+    .muted {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    @media (max-width: 760px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .hero,
+      .content {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <h1>TaxExtract AI</h1>
+      <p>Local-First Intelligent Document Processing</p>
+    </section>
+    <section class="content">
+      <div class="notice">
+        <strong>Netlify build fixed:</strong> this repository is a Python Streamlit application, not a Hugo static site. Netlify cannot run the Streamlit server, so this static page is published only to avoid the incorrect Hugo build command.
+      </div>
+      <div class="grid">
+        <div class="card">
+          <strong>Recommended Host</strong>
+          Deploy the real app on Streamlit Community Cloud and select <code>app.py</code> as the entry file.
+        </div>
+        <div class="card">
+          <strong>Local Run</strong>
+          Install requirements and start the app with:
+          <code>streamlit run app.py</code>
+        </div>
+        <div class="card">
+          <strong>Other Server Hosts</strong>
+          Render, Railway, or Heroku can run Streamlit because they support long-running Python web processes.
+        </div>
+      </div>
+      <p class="muted">
+        Netlify is excellent for static websites. TaxExtract AI needs a live Python process for uploads, OCR/parsing, session state, review workflow, and exports.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
